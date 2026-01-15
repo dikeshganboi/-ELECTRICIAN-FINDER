@@ -134,7 +134,7 @@ export default function SearchPage() {
       if (searchQuery) params.skill = searchQuery;
       
       console.log("[Search] Fetching electricians with params:", params);
-      const result = await api.searchNearby(params) as Promise<{ electricians: ElectricianFromApi[] }>;
+      const result = await api.searchNearby(params) as { electricians: ElectricianFromApi[] };
       console.log("[Search] Found electricians:", result.electricians.length);
       return result;
     },
