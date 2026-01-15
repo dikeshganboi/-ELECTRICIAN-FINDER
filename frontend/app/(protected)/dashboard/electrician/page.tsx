@@ -261,7 +261,6 @@ export default function ElectricianDashboard() {
           <ElectricianProfileMenu
             electricianData={electricianProfile ? {
               name: electricianProfile.name,
-              email: electricianProfile.userId?.email,
               phone: electricianProfile.phone,
               skills: electricianProfile.skills,
               experienceYears: electricianProfile.experienceYears,
