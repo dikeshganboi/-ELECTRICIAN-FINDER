@@ -2,12 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { useElectricianLocation } from "@/hooks/useElectricianLocation";
-import { MapPin, Activity, ToggleLeft, ToggleRight } from "lucide-react";
+import { MapPin, Activity, ToggleLeft, ToggleRight, Zap } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { ElectricianProfileMenu } from "@/components/features/ElectricianProfileMenu";
+import { env } from "@/lib/env";
+import Link from "next/link";
+
+interface ElectricianProfile {
+  _id: string;
+  name: string;
+  phone?: string;
+  skills?: string[];
+  experienceYears?: number;
+  baseRate?: number;
+  verificationStatus?: string;
+  profilePhoto?: string;
+}
 
 export default function ElectricianDashboard() {
   const { userId, role } = useAuth();
   const [isOnline, setIsOnline] = useState(false);
+  const [electricianProfile, setElectricianProfile] = useState<ElectricianProfile | null>(null);
   const electricianId = userId || undefined;
 
   const { currentLocation, isTracking, error } = useElectricianLocation({
@@ -16,6 +31,59 @@ export default function ElectricianDashboard() {
     intervalMs: 4000
   });
 
+  // Fetch electrician profile
+  const fetchProfile = async () => {
+    if (!userId || role !== "electrician") return;
+    
+    try {
+      const token = localStorage.getItem("accessToken");
+      if (!token) return;
+
+      const response = await fetch(`${env.apiBaseUrl}/api/electricians/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setElectricianProfile(data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch electrician profile:", err);
+    }
+  };
+
+  const handlePhotoUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append("photo", file);
+    
+    try {
+      const response = await fetch(`${env.apiBaseUrl}/api/electricians/${userId}/photo`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        await fetchProfile();
+      } else {
+        throw new Error("Failed to upload photo");
+      }
+    } catch (error) {
+      console.error("Photo upload error:", error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, [userId, role]);
+
   useEffect(() => {
     if (role !== "electrician") {
       setIsOnline(false);
@@ -23,8 +91,23 @@ export default function ElectricianDashboard() {
   }, [role]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-3 sm:p-4 md:p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      {/* Header with Profile Menu */}
+      <header className="bg-white border-b shadow-sm sticky top-0 z-50">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
+          <Link href="/electrician/dashboard" className="flex items-center gap-2">
+            <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+            <span className="text-lg sm:text-xl font-bold">ElectricianFinder</span>
+          </Link>
+          <ElectricianProfileMenu
+            electricianData={electricianProfile}
+            onPhotoUpload={handlePhotoUpload}
+          />
+        </div>
+      </header>
+
+      <div className="p-3 sm:p-4 md:p-6">
+        <div className="max-w-4xl mx-auto">{/* Rest of the dashboard content */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
           <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Electrician Dashboard</h1>
 
