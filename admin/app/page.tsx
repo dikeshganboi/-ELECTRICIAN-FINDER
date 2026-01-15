@@ -10,6 +10,7 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ export default function AdminLoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:4000/api/admin/login", {
+      const response = await fetch(`${apiBase}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

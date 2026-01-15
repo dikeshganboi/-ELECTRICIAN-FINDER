@@ -19,6 +19,7 @@ interface Electrician {
 
 export default function ElectriciansPage() {
   const { token } = useAdmin();
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
   const [searchTerm, setSearchTerm] = useState("");
   const [filterVerified, setFilterVerified] = useState<"all" | "verified" | "unverified">("all");
   const [electricians, setElectricians] = useState<Electrician[]>([]);
@@ -30,7 +31,7 @@ export default function ElectriciansPage() {
 
   const fetchElectricians = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/admin/electricians?status=all", {
+      const response = await fetch(`${apiBase}/api/admin/electricians?status=all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {

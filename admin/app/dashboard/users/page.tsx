@@ -15,6 +15,7 @@ interface User {
 
 export default function UsersPage() {
   const { token } = useAdmin();
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "active" | "blocked">("all");
   const [users, setUsers] = useState<User[]>([]);
@@ -26,7 +27,7 @@ export default function UsersPage() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/admin/users", {
+      const response = await fetch(`${apiBase}/api/admin/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {

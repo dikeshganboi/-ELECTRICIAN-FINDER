@@ -15,6 +15,7 @@ interface Booking {
 
 export default function BookingsPage() {
   const { token } = useAdmin();
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "completed" | "pending" | "cancelled">("all");
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -26,7 +27,7 @@ export default function BookingsPage() {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/admin/bookings", {
+      const response = await fetch(`${apiBase}/api/admin/bookings`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {

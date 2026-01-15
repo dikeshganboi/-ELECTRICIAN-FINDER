@@ -34,6 +34,7 @@ interface Electrician {
 
 export default function VerificationPage() {
   const { token } = useAdmin();
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
   const [electricians, setElectricians] = useState<Electrician[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,7 +52,7 @@ export default function VerificationPage() {
   const fetchElectricians = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/admin/electricians?status=${filterStatus}`,
+        `${apiBase}/api/admin/electricians?status=${filterStatus}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,7 +74,7 @@ export default function VerificationPage() {
   const handleApprove = async (electricianId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/admin/electricians/${electricianId}/approve`,
+        `${apiBase}/api/admin/electricians/${electricianId}/approve`,
         {
           method: "PATCH",
           headers: {
@@ -98,7 +99,7 @@ export default function VerificationPage() {
   const handleReject = async (electricianId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/admin/electricians/${electricianId}/reject`,
+        `${apiBase}/api/admin/electricians/${electricianId}/reject`,
         {
           method: "PATCH",
           headers: {

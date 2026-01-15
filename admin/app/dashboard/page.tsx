@@ -15,6 +15,7 @@ interface Stats {
 
 export default function DashboardPage() {
   const { token } = useAdmin();
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
   const [stats, setStats] = useState<Stats>({
     totalUsers: 0,
     totalElectricians: 0,
@@ -28,7 +29,7 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/admin/stats", {
+        const response = await fetch(`${apiBase}/api/admin/stats`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
