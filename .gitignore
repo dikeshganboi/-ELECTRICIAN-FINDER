@@ -1,0 +1,44 @@
+# Electrician Finder Monorepo - Professional .gitignore
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+.dist/
+dist/
+build/
+coverage/
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# Logs
+logs/
+*.log
+
+# Environment files (do not commit secrets)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*
+!backend/.env.production.template
+!frontend/.env.production.template
+!admin/.env.production.template
+
+# OS & Editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Misc
+*.swp
+*.swo
