@@ -107,9 +107,9 @@ export default function ElectricianDashboard() {
       </header>
 
       <div className="p-3 sm:p-4 md:p-6">
-        <div className="max-w-4xl mx-auto">{/* Rest of the dashboard content */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Electrician Dashboard</h1>
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Electrician Dashboard</h1>
 
           {/* Availability Toggle */}
           <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
@@ -209,6 +209,7 @@ export default function ElectricianDashboard() {
               </li>
             </ul>
           </div>
+        </div>
         </div>
       </div>
     </div>
