@@ -14,6 +14,7 @@ import Link from "next/link";
 import { env } from "@/lib/env";
 import { VerificationStatus } from "@/components/features/VerificationStatus";
 import { DocumentUploadForm } from "@/components/features/DocumentUploadForm";
+import { ElectricianProfileMenu } from "@/components/features/ElectricianProfileMenu";
 import { Electrician } from "@/types";
 
 interface ElectricianProfileData extends Electrician {
@@ -224,24 +225,52 @@ export default function ElectricianDashboard() {
     }
   };
 
+  const handlePhotoUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append("photo", file);
+    
+    try {
+      const response = await fetch(`${env.apiBaseUrl}/api/electricians/${userId}/photo`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        await fetchProfile();
+      } else {
+        throw new Error("Failed to upload photo");
+      }
+    } catch (error) {
+      console.error("Photo upload error:", error);
+      throw error;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="bg-white border-b shadow-sm sticky top-0 z-50">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
           <Link href="/dashboard/electrician" className="flex items-center gap-2">
-            <Zap className="h-6 w-6 text-blue-600" />
-            <span className="text-xl font-bold">ElectricianFinder</span>
+            <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+            <span className="text-lg sm:text-xl font-bold">ElectricianFinder</span>
           </Link>
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="font-semibold">{electricianProfile?.name || "Electrician"}</p>
-              <p className="text-sm text-gray-600">Service Provider</p>
-            </div>
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
-              {electricianProfile?.name?.charAt(0).toUpperCase() || "E"}
-            </div>
-          </div>
+          <ElectricianProfileMenu
+            electricianData={electricianProfile ? {
+              name: electricianProfile.name,
+              email: electricianProfile.userId?.email,
+              phone: electricianProfile.phone,
+              skills: electricianProfile.skills,
+              experienceYears: electricianProfile.experienceYears,
+              baseRate: electricianProfile.baseRate,
+              verificationStatus: electricianProfile.verificationStatus,
+              profilePhoto: electricianProfile.profilePhoto
+            } : null}
+            onPhotoUpload={handlePhotoUpload}
+          />
         </div>
       </header>
 
