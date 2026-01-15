@@ -69,7 +69,8 @@ export function ElectricianProfileMenu({ electricianData, onPhotoUpload }: Elect
     }
   };
 
-  const getInitials = (name: string) => {
+  const getInitials = (name?: string) => {
+    if (!name) return "E";
     return name
       .split(" ")
       .map((n) => n[0])
