@@ -16,49 +16,49 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
-            <Zap className="h-7 w-7 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">ElectricianFinder</span>
+            <Zap className="h-6 w-6 sm:h-7 sm:w-7 text-blue-600" />
+            <span className="text-lg sm:text-2xl font-bold text-gray-900">ElectricianFinder</span>
           </Link>
           <AuthNavbar />
         </div>
       </header>
 
       {/* Hero Section - UrbanClap Style */}
-      <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-16 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 sm:py-12 md:py-20">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="max-w-2xl mx-auto text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
               Home repair made <span className="text-blue-600">easy</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
               Book experienced electricians in just 30 seconds. Expert service at your doorstep.
             </p>
           </div>
 
           {/* Search Bar - UrbanClap Style */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="bg-white rounded-3xl shadow-lg p-2 flex items-center gap-2">
-              <div className="flex-1 flex items-center gap-3 px-4">
-                <MapPin className="h-5 w-5 text-gray-400" />
+          <div className="max-w-3xl mx-auto mb-8 sm:mb-12">
+            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <div className="flex-1 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-0">
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 flex-shrink-0" />
                 <input 
                   type="text" 
                   placeholder="Enter your location" 
-                  className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-400"
+                  className="flex-1 bg-transparent border-none outline-none text-sm sm:text-base text-gray-900 placeholder-gray-400"
                 />
               </div>
-              <div className="h-10 w-px bg-gray-200"></div>
-              <div className="flex-1 flex items-center gap-3 px-4">
-                <Search className="h-5 w-5 text-gray-400" />
+              <div className="h-px sm:h-10 sm:w-px bg-gray-200"></div>
+              <div className="flex-1 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-0">
+                <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 flex-shrink-0" />
                 <input 
                   type="text" 
                   placeholder="What do you need?" 
-                  className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-400"
+                  className="flex-1 bg-transparent border-none outline-none text-sm sm:text-base text-gray-900 placeholder-gray-400"
                 />
               </div>
-              <Link href="/search">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 m-1">
+              <Link href="/search" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 sm:px-6 py-2.5 sm:py-2 m-1 text-sm sm:text-base">
                   Search
                 </Button>
               </Link>
@@ -66,42 +66,42 @@ export default function HomePage() {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-3 gap-4 md:gap-8 text-center max-w-2xl mx-auto mb-8">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-8 text-center max-w-2xl mx-auto mb-6 sm:mb-8">
             <div>
-              <p className="text-2xl md:text-3xl font-bold text-gray-900">50K+</p>
-              <p className="text-sm text-gray-600">Verified Experts</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">50K+</p>
+              <p className="text-xs sm:text-sm text-gray-600">Verified Experts</p>
             </div>
             <div>
-              <p className="text-2xl md:text-3xl font-bold text-gray-900">100K+</p>
-              <p className="text-sm text-gray-600">Happy Customers</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">100K+</p>
+              <p className="text-xs sm:text-sm text-gray-600">Happy Customers</p>
             </div>
             <div>
-              <p className="text-2xl md:text-3xl font-bold text-gray-900">4.9★</p>
-              <p className="text-sm text-gray-600">Average Rating</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">4.9★</p>
+              <p className="text-xs sm:text-sm text-gray-600">Average Rating</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services/Categories Section - UrbanClap Grid Style */}
-      <section id="services" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-2">Popular Services</h2>
-            <p className="text-gray-600 text-lg">Choose from our wide range of electrical services</p>
+      <section id="services" className="py-12 sm:py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">Popular Services</h2>
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg">Choose from our wide range of electrical services</p>
           </div>
           
           {/* Services Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 mb-6 sm:mb-8">
             {services.map((service, idx) => {
               const Icon = service.icon;
               return (
                 <Link key={idx} href="/search">
-                  <div className="bg-white border-2 border-gray-100 rounded-2xl p-6 text-center hover:border-blue-300 hover:shadow-lg transition-all cursor-pointer group">
-                    <div className={`w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition`}>
-                      <Icon className="h-7 w-7" />
+                  <div className="bg-white border-2 border-gray-100 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center hover:border-blue-300 hover:shadow-lg transition-all cursor-pointer group">
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${service.color} rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform`}>
+                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
                     </div>
-                    <p className="text-sm font-semibold text-gray-900">{service.label}</p>
+                    <p className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">{service.label}</p>
                   </div>
                 </Link>
               );

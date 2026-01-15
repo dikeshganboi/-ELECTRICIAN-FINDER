@@ -33,6 +33,8 @@ type ElectricianFromApi = {
 export default function SearchPage() {
   const router = useRouter();
   const { userId, logout } = useAuth();
+  const [showMap, setShowMap] = useState(true);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   
   const handleLogout = () => {
     logout();

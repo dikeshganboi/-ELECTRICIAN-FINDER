@@ -8,40 +8,40 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Zap className="h-6 w-6 text-blue-600" />
-            <span className="text-xl font-bold">ElectricianFinder</span>
+            <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+            <span className="text-base sm:text-xl font-bold">ElectricianFinder</span>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link href="/search">
-              <Button>Find Electrician</Button>
+              <Button size="sm" className="text-xs sm:text-sm">Find Electrician</Button>
             </Link>
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-semibold">
               JD
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         {/* Welcome Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
-          <p className="text-gray-600">Here's what's happening with your bookings today</p>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, John!</h1>
+          <p className="text-sm sm:text-base text-gray-600">Here's what's happening with your bookings today</p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Calendar className="h-6 w-6 text-blue-600" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+          <div className="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-sm">
+            <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-600" />
               </div>
-              <span className="text-green-600 text-sm font-semibold">+12%</span>
+              <span className="text-green-600 text-xs sm:text-sm font-semibold">+12%</span>
             </div>
-            <h3 className="text-2xl font-bold mb-1">24</h3>
-            <p className="text-gray-600 text-sm">Total Bookings</p>
+            <h3 className="text-xl sm:text-2xl font-bold mb-1">24</h3>
+            <p className="text-gray-600 text-xs sm:text-sm">Total Bookings</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm">
