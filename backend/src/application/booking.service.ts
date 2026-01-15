@@ -57,7 +57,7 @@ export const updateBookingStatus = async ({ bookingId, status }: { bookingId: st
   const booking = await BookingModel.findById(bookingId);
   if (!booking) throw new Error("Booking not found");
 
-  const allowedTransitions: Record<string, string[]> = {
+  const allowedTransitions = {
     requested: ["accepted", "rejected", "cancelled"],
     accepted: ["arrived", "cancelled", "rejected"],
     arrived: ["in_progress", "cancelled"],
@@ -66,12 +66,16 @@ export const updateBookingStatus = async ({ bookingId, status }: { bookingId: st
     closed: [],
     rejected: [],
     cancelled: []
-  };
+  } as const;
 
-  const nextStatus = status as keyof typeof allowedTransitions;
-  const current = booking.status as keyof typeof allowedTransitions;
+  type BookingStatus = keyof typeof allowedTransitions;
+  const canTransition = (from: BookingStatus, to: BookingStatus) =>
+    (allowedTransitions[from] as readonly BookingStatus[]).includes(to);
 
-  if (!allowedTransitions[current]?.includes(nextStatus)) {
+  const nextStatus = status as BookingStatus;
+  const current = booking.status as BookingStatus;
+
+  if (!canTransition(current, nextStatus)) {
     throw new Error(`Invalid status transition from ${current} to ${nextStatus}`);
   }
 
