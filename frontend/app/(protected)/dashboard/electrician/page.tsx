@@ -20,6 +20,8 @@ import { Electrician } from "@/types";
 interface ElectricianProfileData extends Electrician {
   _id: string;
   name: string;
+  phone?: string;
+  profilePhoto?: string;
 }
 
 export default function ElectricianDashboard() {
