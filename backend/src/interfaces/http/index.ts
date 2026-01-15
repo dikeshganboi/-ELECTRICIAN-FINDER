@@ -10,6 +10,7 @@ import reviewRoutes from "./review.routes";
 import servicesRoutes from "./services.routes";
 import electricianStatsRoutes from "./routes/electrician.stats.routes";
 import verificationRoutes from "./verification.routes";
+import healthRoutes from "./health.routes";
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.use("/search", searchRoutes);
 router.use("/reviews", reviewRoutes);
 router.use("/services", servicesRoutes);
 router.use("/verification", verificationRoutes);
+router.use("/health", healthRoutes);
 
 export default router;
