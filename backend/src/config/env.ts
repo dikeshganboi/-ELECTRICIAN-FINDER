@@ -5,9 +5,7 @@ dotenv.config();
 const required = [
   "MONGODB_URI",
   "JWT_ACCESS_SECRET",
-  "JWT_REFRESH_SECRET",
-  "RAZORPAY_KEY",
-  "RAZORPAY_SECRET"
+  "JWT_REFRESH_SECRET"
 ];
 
 required.forEach((key) => {
@@ -29,6 +27,7 @@ export const env = {
   jwtAccessTtl: process.env.JWT_ACCESS_TTL || "24h", // Increased from 15m to 24 hours
   jwtRefreshTtl: process.env.JWT_REFRESH_TTL || "30d", // Increased from 7d to 30 days
   corsOrigin: parsedCorsOrigin.length === 1 && parsedCorsOrigin[0] === "*" ? "*" : parsedCorsOrigin,
-  razorpayKey: process.env.RAZORPAY_KEY as string,
-  razorpaySecret: process.env.RAZORPAY_SECRET as string,
+  razorpayKey: process.env.RAZORPAY_KEY || "",
+  razorpaySecret: process.env.RAZORPAY_SECRET || "",
+  paymentsEnabled: Boolean(process.env.RAZORPAY_KEY && process.env.RAZORPAY_SECRET),
 };
