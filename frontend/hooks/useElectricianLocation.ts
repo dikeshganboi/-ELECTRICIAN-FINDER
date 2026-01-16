@@ -132,17 +132,6 @@ export const useElectricianLocation = ({
       setCurrentLocation(null);
     }
   }, [electricianId, isOnline]); // Only react to online status changes
-        navigator.geolocation.clearWatch(watchIdRef.current);
-        watchIdRef.current = null;
-      }
-
-      // Set status to offline
-      if (socketRef.current?.connected) {
-        socketRef.current.emit("set:availability", "offline");
-      }
-      setIsTracking(false);
-    }
-  }, [electricianId, isOnline]); // Only react to online status changes
 
   return { currentLocation, isTracking, error };
 };

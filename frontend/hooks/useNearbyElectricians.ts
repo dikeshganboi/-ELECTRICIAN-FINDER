@@ -100,12 +100,6 @@ export const useNearbyElectricians = ({
         });
       }
     });
-          timestamp: Date.now()
-        });
-        console.log("[LiveTracking] Updated electricians map, total:", updated.size);
-        return updated;
-      });
-    });
 
     // Remove stale electricians (no update in 15 seconds)
     const cleanupInterval = setInterval(() => {
