@@ -137,6 +137,24 @@ export default function ElectricianDashboard() {
     return () => clearInterval(interval);
   }, [electricianProfile?._id]);
 
+  // Listen for booking updates and refresh active bookings
+  useEffect(() => {
+    if (!userId) return;
+    const { io } = require("socket.io-client");
+    const socketRef = io(process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000", {
+      auth: { token: localStorage.getItem("accessToken") }
+    });
+
+    socketRef.on("booking:update", (booking: any) => {
+      console.log("[Electrician] Booking update received:", booking.status);
+      fetchActiveBookings();
+    });
+
+    return () => {
+      socketRef.disconnect();
+    };
+  }, [userId]);
+
   useEffect(() => {
     if (role !== "electrician") {
       setIsOnline(false);
