@@ -111,22 +111,37 @@ export default function ElectricianDashboard() {
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Electrician Dashboard</h1>
 
-          {/* Availability Toggle */}
-          <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          {/* Availability Toggle with Visual Status */}
+          <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-transparent relative">
+            {/* Live Status Indicator */}
+            <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm shadow-sm">
+              <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-500 animate-pulse' : 'bg-slate-400'}`}></span>
+              <span className="text-xs font-semibold text-slate-700">
+                {isOnline ? 'LIVE' : 'OFFLINE'}
+              </span>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pr-20 sm:pr-24">
               <div className="flex-1">
-                <h2 className="text-lg sm:text-xl font-semibold mb-2">Availability Status</h2>
+                <h2 className="text-lg sm:text-xl font-semibold mb-2 flex items-center gap-2">
+                  Availability Status
+                  {isOnline && (
+                    <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded">
+                      Active
+                    </span>
+                  )}
+                </h2>
                 <p className="text-sm sm:text-base text-slate-600">
                   {isOnline
-                    ? "You are online and visible to nearby customers"
+                    ? "✓ You are online and visible to nearby customers"
                     : "Turn online to start receiving booking requests"}
                 </p>
               </div>
               <button
                 onClick={() => setIsOnline(!isOnline)}
-                className={`p-3 sm:p-4 rounded-xl transition-colors self-center sm:self-auto ${
+                className={`p-3 sm:p-4 rounded-xl transition-all self-center sm:self-auto shadow-md ${
                   isOnline
-                    ? "bg-green-500 hover:bg-green-600"
+                    ? "bg-green-500 hover:bg-green-600 ring-2 ring-green-300"
                     : "bg-slate-300 hover:bg-slate-400"
                 }`}
               >

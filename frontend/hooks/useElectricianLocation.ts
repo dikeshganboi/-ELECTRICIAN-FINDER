@@ -112,12 +112,26 @@ export const useElectricianLocation = ({
 
       // Set status to online
       if (socketRef.current.connected) {
+        console.log("[Electrician] Going ONLINE");
         socketRef.current.emit("set:availability", "online");
         setIsTracking(true);
       }
     } else {
       // Stop location tracking
       if (watchIdRef.current !== null) {
+        navigator.geolocation.clearWatch(watchIdRef.current);
+        watchIdRef.current = null;
+      }
+
+      // Set status to offline
+      if (socketRef.current?.connected) {
+        console.log("[Electrician] Going OFFLINE");
+        socketRef.current.emit("set:availability", "offline");
+      }
+      setIsTracking(false);
+      setCurrentLocation(null);
+    }
+  }, [electricianId, isOnline]); // Only react to online status changes
         navigator.geolocation.clearWatch(watchIdRef.current);
         watchIdRef.current = null;
       }

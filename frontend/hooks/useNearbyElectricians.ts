@@ -80,6 +80,28 @@ export const useNearbyElectricians = ({
           ...data,
           timestamp: Date.now()
         });
+        return updated;
+      });
+    });
+
+    // Listen for electrician status changes
+    socketRef.current.on("electrician:status:changed", (data: {
+      electricianUserId: string;
+      status: string;
+    }) => {
+      console.log("[StatusChange] Electrician status changed:", data);
+      
+      // If electrician went offline, remove from map
+      if (data.status === "offline") {
+        setElectricians((prev) => {
+          const updated = new Map(prev);
+          updated.delete(data.electricianUserId);
+          return updated;
+        });
+      }
+    });
+          timestamp: Date.now()
+        });
         console.log("[LiveTracking] Updated electricians map, total:", updated.size);
         return updated;
       });

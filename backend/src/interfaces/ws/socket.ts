@@ -43,8 +43,15 @@ export const setupSocket = (httpServer: any) => {
     socket.on("set:availability", async (status: "online" | "offline" | "busy") => {
       try {
         await updatePresence(userId, status);
-        io.emit("electrician:status", { userId, status });
-        logger.info({ userId, status }, "Availability updated");
+        
+        // Broadcast status change to all connected users
+        io.emit("electrician:status:changed", { 
+          electricianUserId: userId, 
+          status,
+          timestamp: new Date()
+        });
+        
+        logger.info({ userId, status }, `Electrician availability changed to ${status}`);
       } catch (err) {
         logger.error({ err }, "Error updating availability");
       }
